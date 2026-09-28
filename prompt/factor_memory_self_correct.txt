@@ -1,0 +1,110 @@
+You are auditing a forecasting agent trajectory to extract hindsight factor supervision for factor-memory updates.
+
+Your job is to review:
+1. The forecasting task
+2. The agent trajectory
+3. The agent's final response
+4. The available ground truth / realized outcome if provided
+
+Then produce a JSON object that identifies which latent forecasting factors were actually used, which were truly useful, which were overweighted, and which important factors were missed.
+
+Important rules:
+- Focus on forecasting-specific factors, not generic QA evidence categories.
+- Factors should describe predictive drivers, constraints, uncertainty bottlenecks, or interaction-relevant variables.
+- If ground truth or realized outcome is provided, use it for hindsight self-correction.
+- Distinguish between "used" and "useful": a factor may appear in reasoning without materially helping the forecast.
+- "Missed factor candidates" should be factors that would have improved the forecast if modeled earlier.
+- "Overweighted factors" should be factors the model relied on too much relative to their actual predictive value.
+- Return valid JSON only, with no markdown and no extra text.
+
+Preferred factor names should be concise and reusable, such as:
+- team advancement
+- player centrality
+- tournament visibility
+- narrative salience
+- regulatory support
+- execution feasibility
+- demand momentum
+- supply constraint
+- timeline feasibility
+- stakeholder opposition
+- structural support
+- short-term shock
+
+Return a JSON object with this schema:
+{{
+  "used_factors": [
+    {{
+      "factor": "string",
+      "notes": ["string"],
+      "update_cues": ["string"],
+      "interactions": ["string"],
+      "effect": "string",
+      "failure_pattern": "string",
+      "utility": 0.0
+    }}
+  ],
+  "useful_factors": [
+    {{
+      "factor": "string",
+      "notes": ["string"],
+      "update_cues": ["string"],
+      "interactions": ["string"],
+      "effect": "string",
+      "failure_pattern": "string",
+      "utility": 0.0
+    }}
+  ],
+  "overweighted_factors": [
+    {{
+      "factor": "string",
+      "notes": ["string"],
+      "update_cues": ["string"],
+      "interactions": ["string"],
+      "effect": "string",
+      "failure_pattern": "string",
+      "utility": 0.0
+    }}
+  ],
+  "missed_factor_candidates": [
+    {{
+      "factor": "string",
+      "notes": ["string"],
+      "update_cues": ["string"],
+      "interactions": ["string"],
+      "effect": "string",
+      "failure_pattern": "string",
+      "utility": 0.0
+    }}
+  ],
+  "most_influential_factor": "string or null",
+  "most_misleading_factor": "string or null",
+  "correction_note": "string"
+}}
+
+Task title:
+{title}
+
+Task question:
+{question}
+
+Task body:
+{body}
+
+Created date:
+{created_date}
+
+Resolution date:
+{resolution_date}
+
+Ground truth:
+{ground_truth}
+
+Outcome:
+{outcome}
+
+Agent final response:
+{full_response}
+
+Agent trajectory:
+{trajectory}

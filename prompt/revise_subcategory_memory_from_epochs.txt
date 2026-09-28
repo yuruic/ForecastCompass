@@ -1,0 +1,101 @@
+You are revising reusable forecasting memory for one subcategory.
+
+Category:
+{category_name}
+
+Subcategory:
+{subcategory_name}
+
+Existing memory (built from {n_existing_questions} questions):
+{existing_memory_json}
+
+Batch-merged memory revision summaries for this subcategory (from the current epoch, {n_new_questions} new questions, each summary aggregates signals from a batch of events):
+{event_revision_suggestions_json}
+
+Each per-event suggestion was produced by comparing a filtered inference against a no-filter oracle reference and ground truth.
+
+Task:
+- Synthesize across all per-event revision suggestions.
+- Revise memory only when a change is supported by multiple events.
+- Keep factors reusable, high-level, and stable across events.
+- Summarize recurring calibration and reasoning lessons.
+- Preserve useful existing content unless there is enough repeated evidence to revise it.
+
+IMPORTANT — Factor preservation rules:
+- Every existing factor must be explicitly addressed. The default action is KEEP.
+- A factor may be MODIFIED only if at least 1 event suggestion explicitly targets it (action="revise").
+- A factor may be DROPPED only if at least 2 event suggestions explicitly deprioritize or contradict it AND the factor is not independently useful for other events in this subcategory.
+- If {n_new_questions} < {n_existing_questions}, apply extra caution: do not drop any factor unless clearly contradicted by multiple suggestions; prefer extending or merging over replacing.
+- New factors may be ADDED only if they capture a dimension genuinely absent from all existing factors; explain the gap in update_rationale.
+- Silent replacement of existing factors with differently-named equivalent factors is not allowed.
+
+Return a JSON object with:
+- category_name: string
+- subcategory_name: string
+- revised_common_factors: array of objects with:
+  - factor_name: string
+  - description: string
+  - typical_effect_on_output: string
+  - factor_specific_checks: array of strings
+  - common_failures: array of strings
+- revised_common_reasoning_patterns: object with:
+  - calibration_experiences: array of strings
+  - overconfidence_patterns: array of strings
+  - underconfidence_patterns: array of strings
+  - probability_update_lessons: array of strings
+  - common_reasoning_failures: array of strings
+- revised_representative_examples: array of strings
+- revised_notes: string
+- update_rationale: string
+
+Limits:
+- revised_common_factors: at most {max_factors}
+- each reasoning-pattern list: at most 8 items
+- revised_representative_examples: at most 5 items
+- factor_specific_checks: usually 2-4 short items
+- common_failures: usually 2-4 short items
+- revised_notes: 1-3 sentences
+- update_rationale: 1-3 sentences
+
+Core separation:
+- Factor memory = what predictive dimensions matter in this subcategory.
+- Reasoning memory = how to update probabilities, calibrate confidence, and handle uncertainty.
+- If something is mainly a calibration rule, update rule, confidence cap, provenance rule, threshold, regularization policy, or late-window verification rule, put it in revised_common_reasoning_patterns, not revised_common_factors.
+
+Revision rules:
+- Only revise memory when multiple event-level suggestions support the change.
+- Preserve useful existing content by default; merge, refine, or extend instead of dropping content unless repeated evidence suggests removal.
+- Prioritize stable cross-event patterns over one-off anomalies.
+- Merge overlapping factors into broader reusable factors.
+- Each revised factor must be a broad latent predictive dimension, not a named entity, search query, raw metric, or procedural rule.
+- Good factors look like: market-implied expectation, structural opportunity and role, institutional signaling, macro trend alignment, timing feasibility, electorate alignment.
+- Avoid factor names like: evidence credibility, provenance, update caps, thresholds, historical priors, regularization, tie-probability control, late-window verification cadence.
+
+Factor rules:
+- For each revised factor:
+  - description = reusable meaning of the factor
+  - typical_effect_on_output = how it usually shifts probabilities or ranking
+  - factor_specific_checks = short local interpretation checks tied only to this factor
+  - common_failures = recurring factor-specific mistakes
+- Factor entries should still make sense even if all numeric update rules are removed.
+
+Reasoning rules:
+- revised_common_reasoning_patterns should store cross-factor forecasting lessons.
+- Focus especially on calibration, not just directional correctness.
+- Capture lessons about when to stay near base rates, when weak signals should not be stacked, when large probability shifts require direct high-reliability event-specific evidence, and how to handle sparse, conflicting, or uncertain evidence.
+- Distinguish evidence that only helps rank outcomes from evidence strong enough to justify extreme confidence.
+- Prefer short, operational if-then lessons when possible.
+
+Output guidance:
+- revised_common_factors = predictive dimensions
+- factor_specific_checks = local interpretation guidance for one factor
+- common_failures = mistakes tied to that factor
+- revised_common_reasoning_patterns = global forecasting and calibration rules
+- revised_representative_examples = short abstract summaries of instructive cases
+- revised_notes = brief subcategory-level takeaway
+- update_rationale = brief explanation of which repeated signals justified the revision
+
+Final check:
+- Before finalizing each revised factor, ask: is this a predictive dimension or actually a reasoning/calibration rule?
+- If it is a reasoning/calibration rule, move it to revised_common_reasoning_patterns.
+- Return valid JSON only.

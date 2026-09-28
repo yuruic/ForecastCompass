@@ -1,0 +1,27 @@
+Existing taxonomy:
+{taxonomy_text}
+
+Grouped proposed new category candidate:
+{proposal_json}
+
+Decide whether this grouped proposal should be promoted into the taxonomy.
+
+Return a JSON object with these keys:
+- promote_to_taxonomy: boolean
+- target_category_name: string or null
+- target_subcategory_name: string or null
+- create_new_category: boolean
+- create_new_subcategory: boolean
+- rationale: string
+- category_summarized_patterns: array of strings
+- subcategory_summarized_patterns: array of strings
+- examples: array of strings
+
+Rules:
+- If the proposal is actually covered by an existing category/subcategory, do not promote it as new.
+- If it should map to an existing category but needs a new subcategory, set create_new_category=false and create_new_subcategory=true.
+- If it needs a genuinely new top-level category, set create_new_category=true and create_new_subcategory=true.
+- Use concise snake_case names for category and subcategory.
+- Keep at most 3 summarized patterns and at most 3 examples.
+- Examples should be selected from the proposal examples when possible.
+- Always return valid JSON only.

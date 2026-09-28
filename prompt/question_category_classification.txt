@@ -1,0 +1,21 @@
+Taxonomy:
+{taxonomy_text}
+
+Question:
+{question}
+
+Return a JSON object with these keys:
+- matched_existing_taxonomy: boolean
+- category_name: string or null
+- subcategory_name: string or null
+- confidence: number between 0 and 1
+- rationale: short string
+- proposed_category_name: string or null
+- proposed_subcategory_name: string or null
+- proposed_category_rationale: string or null
+
+Rules:
+- If the question fits an existing category and subcategory, set matched_existing_taxonomy=true and fill category_name/subcategory_name.
+- If it does not fit, set matched_existing_taxonomy=false and propose a new category and subcategory.
+- Do not invent multiple options.
+- Keep rationale concise.

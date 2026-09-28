@@ -1,0 +1,97 @@
+You are reviewing one forecasting event to suggest how a subcategory memory should be revised.
+
+Category:
+{category_name}
+
+Subcategory:
+{subcategory_name}
+
+Existing memory:
+{existing_memory_json}
+
+You are given two bundles for this single event:
+1. FILTERED event bundle — the agent's inference under a date-based search cutoff (realistic forecasting condition).
+2. NO-FILTER reference bundle — the agent's inference with no date restriction (oracle reference).
+
+Each bundle contains:
+- question
+- prediction
+- raw_answer
+
+Filtered event bundle:
+{filtered_event_bundle}
+
+No-filter reference bundle:
+{nofilter_event_bundle}
+
+Ground truth:
+{ground_truth}
+
+Task:
+- Compare the filtered inference against the no-filter reference and the ground truth.
+- Identify which parts of the existing memory were useful, missing, too concrete, or misleading for this event.
+- Suggest reusable subcategory-level revisions, not event-specific facts.
+- Distinguish factor-memory issues from reasoning/calibration issues.
+
+Return a JSON object with:
+- category_name: string
+- subcategory_name: string
+- memory_strengths: array of strings
+- memory_gaps: array of strings
+- suggested_factor_revisions: array of objects with:
+  - factor_name: string
+  - action: one of ["keep", "revise", "add", "deprioritize"]
+  - description: string
+  - typical_effect_on_output: string
+  - factor_specific_checks: array of strings
+  - common_failures: array of strings
+- suggested_calibration_revisions: array of strings
+- suggested_reasoning_failure_revisions: array of strings
+- event_specific_notes: string
+
+Limits:
+- memory_strengths: at most 5 items
+- memory_gaps: at most 5 items
+- suggested_factor_revisions: at most {max_factors} items
+- suggested_calibration_revisions: at most 6 items
+- suggested_reasoning_failure_revisions: at most 6 items
+- factor_specific_checks: usually 2-4 short items
+- common_failures: usually 2-4 short items
+
+Core separation:
+- Factor memory = what predictive dimensions matter in this subcategory.
+- Reasoning memory = how to update probabilities, calibrate confidence, and handle uncertainty.
+- If something is mainly a calibration rule, update rule, confidence cap, provenance rule, threshold, regularization policy, or late-window verification rule, do not put it in suggested_factor_revisions.
+
+Factor revision rules:
+- Each suggested factor revision must be a broad latent predictive dimension, not a named entity, search query, raw metric, or procedural rule.
+- Prefer broad reusable factors over narrow event-specific indicators.
+- Good factors look like: market-implied expectation, structural opportunity and role, institutional signaling, macro trend alignment, timing feasibility, electorate alignment.
+- Avoid factor names like: evidence credibility, provenance, update caps, thresholds, historical priors, regularization, tie-probability control, late-window verification cadence.
+- For each suggested factor revision:
+  - description = reusable meaning of the factor
+  - typical_effect_on_output = how it usually shifts probabilities or ranking
+  - factor_specific_checks = short local interpretation checks tied only to this factor
+  - common_failures = recurring factor-specific mistakes visible from this event
+- Factor entries should still make sense even if all numeric update rules are removed.
+
+Reasoning revision rules:
+- suggested_calibration_revisions should capture calibration lessons from this event.
+- suggested_reasoning_failure_revisions should capture reasoning mistakes in factor weighting, logic, evidence interpretation, or uncertainty handling.
+- Focus especially on calibration, not just directional correctness.
+- Distinguish evidence that only helps rank outcomes from evidence strong enough to justify extreme confidence.
+- If the no-filter reference also failed to approach ground truth, note that the missing signal may be genuinely hard to capture rather than a clear memory gap.
+- Prefer short, operational lessons when possible.
+
+Output guidance:
+- memory_strengths = existing memory content that helped
+- memory_gaps = missing or weak memory content exposed by this event
+- suggested_factor_revisions = proposed factor-memory changes
+- suggested_calibration_revisions = calibration/update lessons
+- suggested_reasoning_failure_revisions = reasoning-failure lessons
+- event_specific_notes = short note about what made this event especially informative for memory revision
+
+Final check:
+- Before finalizing each suggested factor revision, ask: is this a predictive dimension or actually a reasoning/calibration rule?
+- If it is a reasoning/calibration rule, move it out of suggested_factor_revisions and into suggested_calibration_revisions or suggested_reasoning_failure_revisions.
+- Return valid JSON only.

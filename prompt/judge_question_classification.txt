@@ -1,0 +1,28 @@
+You are an independent auditor checking whether a forecasting question was
+assigned to the correct category/subcategory in a taxonomy. You did NOT make
+the original assignment — judge it fresh, on its merits.
+
+Question:
+{question}
+
+Assigned category: {category_name}
+Assigned subcategory: {subcategory_name}
+
+Subcategory definition (what this subcategory is supposed to cover):
+Patterns: {subcategory_patterns}
+Example questions previously placed in this subcategory:
+{subcategory_examples}
+
+Judge whether the question was placed in the right subcategory. Consider:
+- Does the question's actual structure (question type, outcome format, resolution
+  mechanism) match what the subcategory's patterns describe?
+- Would a different existing subcategory (if you can infer one from the question
+  itself) fit better than this one?
+- Is this a reasonable/defensible assignment, or a clear mismatch?
+
+Return ONLY valid JSON (no markdown fences):
+{{
+  "is_correct": <true or false>,
+  "score": <integer 1-5, where 5 = clearly correct fit, 1 = clearly wrong subcategory>,
+  "reasoning": "<one or two sentences explaining your judgment>"
+}}

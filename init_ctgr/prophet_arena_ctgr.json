@@ -1,0 +1,279 @@
+{
+  "categories": [
+    {
+      "category_name": "competitive_events",
+      "description": "Questions about the outcome of a single game or a playoff series between two named teams or individuals. Covers professional and college sports across all leagues.",
+      "summarized_patterns": [
+        "which of two named teams wins a single game",
+        "which team wins a best-of-N playoff series",
+        "individual athletic competition winner"
+      ],
+      "examples": [
+        "Which professional football team, Buffalo or New England, will win the game scheduled for Oct 5, 2025?",
+        "Which college football team, Kansas St. or TCU, will win the game scheduled for Oct 11, 2025?",
+        "Which professional baseball team, Philadelphia or Los Angeles D, will win the best-of-five series that begins on October 04, 2025?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "team_sports_match_winner",
+          "description": "Predict the winner of a single game between two named teams. Applies to professional and college sports (NFL, MLB, MLS, WNBA, college football, etc.).",
+          "summarized_patterns": [
+            "professional team sports single game winner",
+            "college team sports single game winner",
+            "head-to-head team matchup in any sport"
+          ],
+          "examples": [
+            "Which professional football team, Jacksonville or Kansas City, will win the game scheduled for Oct 6, 2025?",
+            "Which college football team, Utah or Arizona St., will win the game scheduled for Oct 11, 2025?",
+            "Which professional women's basketball team, Las Vegas or Phoenix, will win the Game 3 matchup scheduled for Oct 8, 2025?",
+            "Which professional MLS soccer team, Miami or Atlanta, will win the game scheduled for Jun 28, 2025?"
+          ]
+        },
+        {
+          "subcategory_name": "playoff_series_winner",
+          "description": "Predict which team wins a multi-game playoff series (best-of-5, best-of-7, etc.) rather than a single game.",
+          "summarized_patterns": [
+            "which team wins a best-of-N playoff series",
+            "series winner across multiple games",
+            "overall series outcome in professional sports playoffs"
+          ],
+          "examples": [
+            "Which professional baseball team, Philadelphia or Los Angeles D, will win the best-of-five series between Philadelphia and Los Angeles D?",
+            "Which team, Los Angeles D or Philadelphia, will win the Los Angeles D vs Philadelphia series in the 2025 professional baseball playoffs?",
+            "Which professional baseball team, Detroit or Seattle, will win the Detroit vs Seattle series in the 2025 professional baseball playoffs?"
+          ]
+        },
+        {
+          "subcategory_name": "individual_competition_winner",
+          "description": "Predict the winner of an individual athletic competition such as a golf tournament, race, or other solo-participant event.",
+          "summarized_patterns": [
+            "golf or individual sport tournament winner",
+            "winner chosen from a field of named participants",
+            "individual competition outcome"
+          ],
+          "examples": [
+            "Baycurrent Classic Winner?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "multi_option_winner_markets",
+      "description": "Questions asking which of several named options wins an overall competition, season championship, award, or political nomination. One outcome is selected from a labeled set.",
+      "summarized_patterns": [
+        "which team wins a season championship",
+        "who wins a political primary or nomination",
+        "which named option wins an award or title"
+      ],
+      "examples": [
+        "Pro Women's Basketball Champion?",
+        "Who will be the Republican nominee for Tennessee's 7th Congressional District (TN-7) for the 2025 U.S. House election?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "tournament_or_championship_winner",
+          "description": "Predict which team or individual wins an overall season championship or named tournament with multiple competing options.",
+          "summarized_patterns": [
+            "season champion from a set of named teams",
+            "overall competition winner from a labeled field",
+            "which option wins the title"
+          ],
+          "examples": [
+            "Pro Women's Basketball Champion?",
+            "Baycurrent Classic Winner? (field of named golfers)"
+          ]
+        },
+        {
+          "subcategory_name": "political_nominee_or_election_winner",
+          "description": "Predict who wins a political primary, nomination, or election from a set of named candidates.",
+          "summarized_patterns": [
+            "party primary nominee outcome",
+            "election winner from named candidates",
+            "political nomination result"
+          ],
+          "examples": [
+            "Who will be the Republican nominee for Tennessee's 7th Congressional District (TN-7) for the 2025 U.S. House election?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "market_chart_or_popularity_outcomes",
+      "description": "Questions about chart positions, numeric sales or stream totals, or whether content exceeds a popularity or engagement threshold.",
+      "summarized_patterns": [
+        "which release will be #1 on a named chart",
+        "how many streams or sales will a release accumulate",
+        "will a piece of content exceed a view or engagement threshold"
+      ],
+      "examples": [
+        "Which album will be #1 on the Billboard Top 200 chart dated Oct 11, 2025?",
+        "What will be the total number of Spotify streams for Taylor Swift's song 'The Fate of Ophelia' by Oct 10, 2025?",
+        "Will any MrBeast video uploaded in September 2025 receive more than 100 million views seven days after its upload?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "chart_rank_winner",
+          "description": "Predict which specific item occupies a named chart position (e.g., #1 on Billboard) on a given date.",
+          "summarized_patterns": [
+            "number one position on a named chart",
+            "top chart rank on a specific date",
+            "which release leads the chart"
+          ],
+          "examples": [
+            "Which album will be #1 on the Billboard Top 200 chart dated Oct 11, 2025?"
+          ]
+        },
+        {
+          "subcategory_name": "sales_or_streams_numeric",
+          "description": "Predict the exact or banded numeric count of sales, streams, or chart units for a release within a specified time window.",
+          "summarized_patterns": [
+            "total Spotify stream count by a deadline",
+            "reported album sales on a chart date",
+            "numeric volume of plays or purchases"
+          ],
+          "examples": [
+            "What will be the total number of Spotify streams for 'The Life of a Showgirl (feat. Sabrina Carpenter)' by Oct 10, 2025?",
+            "What will be the reported album sales for 'The Life of a Showgirl' on the Hits Daily Double Top 50 Chart dated October 10, 2025?"
+          ]
+        },
+        {
+          "subcategory_name": "content_engagement_threshold",
+          "description": "Binary prediction of whether a piece of content (video, post, etc.) will exceed a specified view, like, or engagement count by a deadline.",
+          "summarized_patterns": [
+            "will a video exceed a view count threshold",
+            "binary engagement milestone prediction",
+            "will content reach a specified audience size"
+          ],
+          "examples": [
+            "Will any MrBeast video uploaded in September 2025 receive more than 100 million views seven days after its upload, before Oct 1, 2025?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "public_statements_or_behavior",
+      "description": "Questions about whether a specific word or phrase will be said, or what topic or quote a named person will express, during a scheduled public event, broadcast, podcast, or earnings call.",
+      "summarized_patterns": [
+        "will a named person say a specific word or phrase at an event",
+        "what topic or statement will someone make during a public appearance",
+        "keyword mention in a broadcast, podcast, or earnings call"
+      ],
+      "examples": [
+        "Will Sam Altman say the word 'AGI' during the TBPN Podcast on October 10th?",
+        "What will Alex Cooper say during the next Call Her Daddy Podcast?",
+        "Will any PepsiCo representative say the word 'Tariff' during PepsiCo's next earnings call?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "phrase_mention",
+          "description": "Binary prediction of whether a specific keyword or phrase will be uttered by a named person (or anyone present) during a scheduled event, show, podcast, or corporate call.",
+          "summarized_patterns": [
+            "will a specific word be said during a named event",
+            "binary keyword mention in a broadcast or podcast",
+            "phrase utterance prediction in earnings calls or public appearances"
+          ],
+          "examples": [
+            "Will Sam Altman say the word 'AGI' during the TBPN Podcast on October 10th?",
+            "Will Taylor Swift say 'Engage' or 'Engaged' on The Tonight Show Starring Jimmy Fallon?",
+            "Will Jeff Probst say the word 'Puzzle' during Survivor Season 49 Episode 3?",
+            "Will any PepsiCo representative say the word 'Tariff' during PepsiCo's next earnings call?",
+            "Will any CEO say the word 'Antifa' during the House Oversight Committee hearing?"
+          ]
+        },
+        {
+          "subcategory_name": "specific_quote_or_topic",
+          "description": "Multi-option prediction of what topic, statement, or quoted language a named person will express during a public appearance. The outcome is selected from a labeled set of possible topics.",
+          "summarized_patterns": [
+            "what topic will someone discuss during a podcast or interview",
+            "which phrase or subject will be the focus of a public appearance",
+            "what will announcers or hosts say during a broadcast"
+          ],
+          "examples": [
+            "What will Alex Cooper say during the next Call Her Daddy Podcast?",
+            "What will Taylor Swift say during Late Night With Seth Meyers?",
+            "What will the announcers say during the Kansas City at Jacksonville Pro football game?",
+            "What will the announcers say during the Philadelphia at New York pro football game?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "legal_or_judicial_outcomes",
+      "description": "Questions about the outcome of a named legal case, including which party will be found liable, whether charges will be filed, or the resolution of a named lawsuit.",
+      "summarized_patterns": [
+        "which party will be held liable in a named lawsuit",
+        "legal case resolution or verdict",
+        "outcome of litigation between named parties"
+      ],
+      "examples": [
+        "Which party, Drake or Universal Music Group (UMG), will be held liable in the lawsuit between Drake and UMG by Dec 31, 2026?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "lawsuit_liability_or_verdict",
+          "description": "Predict which party will be found liable, or what the verdict will be, in a named lawsuit or legal dispute.",
+          "summarized_patterns": [
+            "which party wins or is held liable in a lawsuit",
+            "named legal case outcome",
+            "verdict or settlement prediction"
+          ],
+          "examples": [
+            "Which party, Drake or Universal Music Group (UMG), will be held liable in the lawsuit between Drake and UMG by Dec 31, 2026?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "reality_tv_elimination",
+      "description": "Questions about the outcome of a reality TV competition episode, specifically who will be eliminated or voted out.",
+      "summarized_patterns": [
+        "which participant will be eliminated in a reality TV episode",
+        "who gets voted out in a named competition show",
+        "reality competition elimination outcome"
+      ],
+      "examples": [
+        "Which participants will be officially eliminated in Episode 3 of Survivor Season 49?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "elimination_outcome",
+          "description": "Predict which named participant(s) will be eliminated or voted out in a specific episode of a reality competition show.",
+          "summarized_patterns": [
+            "who is eliminated in a named episode of a competition show",
+            "voted-out participant in a reality TV show",
+            "reality show episode elimination result"
+          ],
+          "examples": [
+            "Which participants will be officially eliminated in Episode 3 of Survivor Season 49?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "ambiguous_or_underspecified",
+      "description": "Questions that cannot be meaningfully forecast because they are missing key information such as event description, resolution criteria, time window, or outcome definitions.",
+      "summarized_patterns": [
+        "question missing event description or resolution date",
+        "outcome labels with no domain context",
+        "forecasting prompt too vague to answer without clarification"
+      ],
+      "examples": [
+        "Insufficient date/time information in provided rules/raw to create a fully specified event."
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "missing_resolution_criteria",
+          "description": "Questions that are structurally incomplete — missing the event, domain, resolution date, or outcome definitions needed to produce a calibrated forecast.",
+          "summarized_patterns": [
+            "no event description or resolution date provided",
+            "malformed or placeholder question",
+            "cannot be forecasted without requester clarification"
+          ],
+          "examples": [
+            "Insufficient date/time information in provided rules/raw to create a fully specified event."
+          ]
+        }
+      ]
+    }
+  ]
+}

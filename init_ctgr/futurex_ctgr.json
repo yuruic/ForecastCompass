@@ -1,0 +1,760 @@
+{
+  "categories": [
+    {
+      "category_name": "market_chart_or_popularity_outcomes",
+      "description": "Questions asking which specific items will occupy specific rank positions on a named chart, leaderboard, or ranking list on a given date, OR whether an item exceeds a popularity/entry threshold or ranks above/below a specific competitor.",
+      "summarized_patterns": [
+        "which items will be at rank positions X-Y on chart Z on a specific date",
+        "will an item exceed a popularity, entry count, or stream threshold",
+        "which item ranks higher than another specific item"
+      ],
+      "examples": [
+        "2026-03-23, what will be the projects ranked from 8 to 10 on the latest OpenGithub's github-daily ranking?",
+        "2026-03-24, what songs will be ranked from 1 to 3 in the latest UK's Official Singles Chart?",
+        "Will the 2026 Triton Jeju $100K Main Event exceed 250 entries?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "chart_rank_winner",
+          "description": "Predict which specific item(s) will occupy specific named rank positions (e.g., ranks 1-3, ranks 8-10) on a chart, leaderboard, or ranking list on a given date. The question specifies exact rank slots and asks what fills them. Applies to any domain: music charts, movie box office, GitHub trending, sports standings (ATP/WTA rankings), vehicle hot lists, self-media account rankings, technology lists, etc. KEY DISTINCTION: use this when the question specifies exact rank slots to fill; use popularity_threshold_or_relative_outcome when the question asks whether something exceeds a threshold or beats a specific competitor without naming the rank slot.",
+          "summarized_patterns": [
+            "what will be ranked from position X to Y on chart Z on a specific date",
+            "which items occupy specific named rank slots on a leaderboard",
+            "sports ranking positions (ATP/WTA/other) or media chart positions on a date"
+          ],
+          "examples": [
+            "2026-03-23, what will be the projects ranked from 8 to 10 on the latest OpenGithub's github-daily ranking?",
+            "2026-03-24, what songs will be ranked from 1 to 3 in the latest UK's Official Singles Chart?",
+            "2026-03-23, who will be the players ranked from 12 to 14 in the latest PIF ATP Singles Ranking?",
+            "2026-03-23, who will be the players ranked from 10 to 12 in the latest PIF WTA Doubles Ranking?",
+            "2026-03-23, what will be the vehicles ranked from 3 to 5 on the hot list across China's auto market?",
+            "2026-03-26, what will be the movies ranked from 1 to 3 on Maoyan's Ticket Purchase Intention chart?",
+            "2026-03-29, which self-media accounts will be ranked from 6 to 8 on KolRank's daily ranking?",
+            "Which album will be #1 on the Billboard 200 chart dated September 20, 2025?"
+          ]
+        },
+        {
+          "subcategory_name": "popularity_threshold_or_relative_outcome",
+          "description": "Predict whether an item will exceed a popularity, entry count, or engagement threshold (binary yes/no), OR whether one specific item will rank above/below another specific competitor, without specifying exact rank positions. Does NOT apply when the question asks for the items filling specific rank slots — use chart_rank_winner for that.",
+          "summarized_patterns": [
+            "will an event or item exceed a numeric threshold (entries, streams, registrations)",
+            "will item A rank above item B without specifying the exact rank position",
+            "will a title stay in the top band without specifying which exact slot it occupies"
+          ],
+          "examples": [
+            "Will the 2026 Triton Jeju $100K Main Event exceed 250 entries?",
+            "Will an album rank above another album on the chart?",
+            "Will a release exceed a stream threshold?",
+            "Will 'top fast food' market have a surprising winner?"
+          ]
+        },
+        {
+          "subcategory_name": "sales_or_streams_total",
+          "description": "Predict the total numeric volume of sales, streams, ticket purchases, or views over a reporting window. The answer is a count or numeric total, not a rank position or threshold crossing.",
+          "summarized_patterns": [
+            "how many sales, streams, or plays will a release record",
+            "total transaction or play volume over a time window",
+            "numeric count of purchases or streams"
+          ],
+          "examples": [
+            "How many album sales will 'Swag II' have?",
+            "What will be the total number of Spotify streams?",
+            "How many box office tickets will a film sell in its opening weekend?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "competitive_events",
+      "description": "Questions about outcomes of actual head-to-head matches, physical races, and single athletic competition events. NOT for predicting positions on ongoing statistical leaderboards or ranking lists — use market_chart_or_popularity_outcomes/chart_rank_winner for those.",
+      "summarized_patterns": [
+        "head-to-head match winner between two named players or teams",
+        "race or podium finish in a physical competition event",
+        "tournament draw pairings or fixture outcomes"
+      ],
+      "examples": [
+        "Which driver will win the 2025 Azerbaijan Grand Prix?",
+        "Who will finish top 3 in the 2026 Japanese Grand Prix?",
+        "Which professional tennis player will win the Kovacevic vs Nardi match?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "race_or_finish_outcome",
+          "description": "Predict the winner or finish positions in an actual physical race or single competition event (e.g., F1 race, golf tournament, marathon). The result is determined by the event itself on the day it is held. NOT for predicting positions in ongoing statistical ranking lists like ATP world rankings — those belong in chart_rank_winner.",
+          "summarized_patterns": [
+            "race winner or podium finish in a physical event",
+            "who finishes in top N in a motorsport, golf, or athletic competition",
+            "placement in a single scheduled physical competition"
+          ],
+          "examples": [
+            "Which driver will win the 2025 Azerbaijan Grand Prix?",
+            "Will Oscar Piastri finish in the top three (podium) at the Azerbaijan Grand Prix 2025?",
+            "Who will finish top 3 in the 2026 Japanese Grand Prix?"
+          ]
+        },
+        {
+          "subcategory_name": "individual_match_winner",
+          "description": "Predict the winner of a head-to-head match between two named individuals (tennis, boxing, chess, etc.).",
+          "summarized_patterns": [
+            "tennis or combat sports match winner",
+            "head-to-head individual matchup result",
+            "which of two named players wins a single match"
+          ],
+          "examples": [
+            "Which professional tennis player, Aleksandar Kovacevic or Luca Nardi, will win the match?",
+            "Which professional tennis player, Diana Shnaider or Catherine McNally, will win their Round of 32 match?",
+            "Which boxer, Canelo Alvarez or Terence Crawford, will win?"
+          ]
+        },
+        {
+          "subcategory_name": "team_sports_match_winner",
+          "description": "Predict the winner of a single team sports match (football, basketball, soccer, etc.).",
+          "summarized_patterns": [
+            "professional or college team sports match winner",
+            "which of two named teams wins a single game",
+            "league match winner"
+          ],
+          "examples": [
+            "Which professional football team, Jacksonville or Houston, will win the game scheduled for Sep 21, 2025?",
+            "Which college football team, Akron or Duquesne, will win the game at Akron?",
+            "Which professional MLS soccer team will win the game?"
+          ]
+        },
+        {
+          "subcategory_name": "tournament_draws_or_fixture_outcomes",
+          "description": "Predict the outcome of a tournament draw or the pairings for a fixture schedule, where outcomes are combinations of matchups rather than a single winner.",
+          "summarized_patterns": [
+            "tournament draw pairings prediction",
+            "fixture schedule or bracket matchup outcome",
+            "probability distribution over draw combinations"
+          ],
+          "examples": [
+            "Champions League round of 16 fixtures (both legs) — which teams face each other?"
+          ]
+        },
+        {
+          "subcategory_name": "tournament_champion_attribute",
+          "description": "Predict a specific attribute or achievement of a tournament champion (e.g., whether they won all matches undefeated, their nationality, their seeding), rather than simply who wins.",
+          "summarized_patterns": [
+            "will the champion achieve a specific feat (undefeated run, clean sweep)",
+            "attribute of the tournament winner beyond just their identity",
+            "conditional championship characteristic"
+          ],
+          "examples": [
+            "Infinite Games 26 - Will the champion of the Electric-Knife win all matches undefeated?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "multi_option_winner_markets",
+      "description": "Questions asking which of several named options will win a tournament, championship, award, or election. Options are labeled (A/B/C or named entities) and exactly one wins the overall competition.",
+      "summarized_patterns": [
+        "which team or person wins an entire tournament or championship overall",
+        "which nominee wins an industry or media award",
+        "who wins an election or what is the margin"
+      ],
+      "examples": [
+        "Which team wins the 2026 World Baseball Classic (WBC)?",
+        "Which school will win 2026 MATHCOUNTS NorCal State?",
+        "Which program will win the Outstanding Comedy Series award at the 77th Emmy Awards?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "tournament_or_championship_winner",
+          "description": "Predict which team or individual wins an entire tournament or championship competition. Options are typically labeled A/B/C/D or named entities; exactly one outcome wins the whole event. Distinct from race_or_finish_outcome (single-event placement) and chart_rank_winner (ongoing ranking list positions).",
+          "summarized_patterns": [
+            "which team wins a multi-team tournament overall",
+            "championship winner from labeled or named options",
+            "which region, school, or team wins a competition"
+          ],
+          "examples": [
+            "Which team wins the 2026 World Baseball Classic (WBC)?",
+            "Which region will the 2026 First Stand Tournament champion come from?",
+            "Which school will win 2026 MATHCOUNTS NorCal State?",
+            "Procore Championship Winner?"
+          ]
+        },
+        {
+          "subcategory_name": "award_winner",
+          "description": "Predict which nominee will win a named industry, media, or sports award.",
+          "summarized_patterns": [
+            "industry or media award winner",
+            "sports season award recipient",
+            "which nominee wins the prize"
+          ],
+          "examples": [
+            "Which program will win the Outstanding Comedy Series award at the 77th Emmy Awards?",
+            "Who will win Outstanding Supporting Actor in a Comedy Series at the 77th Emmy Awards?",
+            "Who will win the Pro Women's Basketball Rookie of the Year award?"
+          ]
+        },
+        {
+          "subcategory_name": "election_winner_or_margin",
+          "description": "Predict the winner of an election or the margin of victory.",
+          "summarized_patterns": [
+            "election winner outcome",
+            "vote margin or percentage result",
+            "special or general election result"
+          ],
+          "examples": [
+            "What will be James Walkinshaw's margin of victory in the 2025 Virginia 11th congressional district special election?",
+            "Who will win the election?",
+            "What margin will the candidate win by?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "institutional_decisions",
+      "description": "Questions about policy decisions, appointments, confirmations, or procedural actions by governments, central banks, courts, or other formal institutions.",
+      "summarized_patterns": [
+        "central bank interest rate decision at a scheduled meeting",
+        "confirmation or promotion to a formal role by an institution",
+        "official executive or procedural action within a time window"
+      ],
+      "examples": [
+        "What action will the Federal Reserve take regarding the target federal funds rate?",
+        "Will Aonishiki Arata be promoted to yokozuna after the Haru Basho 2026?",
+        "Banxico interest rate decision in March"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "central_bank_decision",
+          "description": "Predict the outcome of a central bank's interest rate or monetary policy decision at a scheduled meeting (cut, hold, or hike).",
+          "summarized_patterns": [
+            "interest rate cut, hold, or hike at a scheduled central bank meeting",
+            "central bank policy action outcome",
+            "institutional monetary policy move"
+          ],
+          "examples": [
+            "What action will the Federal Reserve take regarding the target federal funds rate at its policy decision on September 17, 2025?",
+            "Banxico interest rate decision in March — will rates be cut, held, or raised?",
+            "Will the Fed cut rates at the next meeting?"
+          ]
+        },
+        {
+          "subcategory_name": "confirmation_or_appointment",
+          "description": "Predict whether a person will be confirmed, appointed, promoted, or approved to a named role by a formal body or institution.",
+          "summarized_patterns": [
+            "senate or institutional confirmation outcome",
+            "nominee approval or rejection by a formal body",
+            "promotion to a formal role (e.g., sumo grand champion, ambassador)"
+          ],
+          "examples": [
+            "Will Christine Toretti be confirmed by the U.S. Senate as Ambassador to Sweden before Apr 1, 2025?",
+            "Will Aonishiki Arata be promoted to yokozuna after the Haru Basho 2026?",
+            "Will a nominee be confirmed before a deadline?"
+          ]
+        },
+        {
+          "subcategory_name": "executive_or_procedural_action",
+          "description": "Predict whether an official executive, legislative, or procedural action will occur within a time window.",
+          "summarized_patterns": [
+            "executive order or decree issuance within a window",
+            "official procedural move before a deadline",
+            "institutional act within a specified time period"
+          ],
+          "examples": [
+            "Will the President sign any Executive Orders between Sep 8, 2025 and Sep 15, 2025?",
+            "Will an official order be issued before a deadline?",
+            "Will a procedural action happen during the window?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "numeric_economic_or_scientific_releases",
+      "description": "Questions about the numeric value or direction of a scheduled economic, financial, or scientific data release (e.g., CPI, freight index, influenza index, daily trading volume). The outcome is a published number or band, not an asset market price.",
+      "summarized_patterns": [
+        "economic indicator above or below consensus at a scheduled release",
+        "scientific, climate, or health index published value on a date",
+        "market trading volume or flow numeric forecast"
+      ],
+      "examples": [
+        "Will the U.S. Consumer Price Index (CPI) come in above expectations?",
+        "What will be the Composite Index of the China Coastal Bulk Freight Index on 2026-03-27?",
+        "What will the China Influenza Weekly Report index value be?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "inflation_or_macro_release",
+          "description": "Predict the outcome of a scheduled macroeconomic data release (CPI, GDP, employment, PMI) relative to expectations or a threshold.",
+          "summarized_patterns": [
+            "CPI or inflation data release outcome relative to consensus",
+            "macro indicator beat or miss estimates",
+            "directional economic data outcome"
+          ],
+          "examples": [
+            "Will the U.S. Consumer Price Index (CPI) come in above expectations?",
+            "Will inflation data be lower than consensus?",
+            "Will a macro release beat or miss estimates?"
+          ]
+        },
+        {
+          "subcategory_name": "scientific_or_climate_index_release",
+          "description": "Predict the published numeric value of a scientific, climate, health, or commodity/freight index at a specific reporting date.",
+          "summarized_patterns": [
+            "climate or environmental index published reading on a date",
+            "freight or commodity composite index value",
+            "health or epidemiological surveillance index figure"
+          ],
+          "examples": [
+            "What will the Land Ocean-Temperature Index (LOTI) value be for August 2025?",
+            "What will be the Composite Index (综合指数) of the China Coastal Bulk Freight Index on 2026-03-27?",
+            "What will be the influenza index value according to the latest China Influenza Weekly Report?"
+          ]
+        },
+        {
+          "subcategory_name": "numeric_threshold_or_directional_release",
+          "description": "Predict whether a numeric data release will be above or below a specific threshold, or move in a particular direction.",
+          "summarized_patterns": [
+            "above or below a numeric threshold",
+            "directional move in a published figure",
+            "higher or lower than a reference level"
+          ],
+          "examples": [
+            "Will inflation data be lower than consensus?",
+            "Will the release come in above the threshold?",
+            "Will the reported figure be higher than expected?"
+          ]
+        },
+        {
+          "subcategory_name": "market_trading_volume_or_flow",
+          "description": "Predict the numeric daily trading value, volume, or capital flow for a specific financial market, exchange, or security on a named date, typically reported in units of hundreds of millions.",
+          "summarized_patterns": [
+            "daily buy or sell trading value in a market on a date",
+            "capital flow or net inflow/outflow forecast",
+            "numeric trading volume or turnover forecast"
+          ],
+          "examples": [
+            "2026-03-19, what will the value (in hundreds of millions of yuan) of Daily Buy Turnover in the Shanghai Stock Market be?"
+          ]
+        },
+        {
+          "subcategory_name": "ambiguous_numeric_without_context",
+          "description": "Questions where the outcome to predict is a bare numeric value with no surrounding label, unit, or domain context in the question text, making the forecasting domain unclear.",
+          "summarized_patterns": [
+            "bare numeric outcome with no domain label or unit",
+            "predict a raw number without explanatory context",
+            "unlabeled numeric outcome"
+          ],
+          "examples": [
+            "What will be the value? Outcome to predict: \"60671.0\"",
+            "What will be the value? Outcome to predict: \"48252.0\""
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "financial_market_prices",
+      "description": "Questions predicting the exact or banded price of a financial asset (stock, commodity, index, or currency) on a specific date, as reported by a named exchange or data provider.",
+      "summarized_patterns": [
+        "exact or banded stock, commodity, or index price on a specific date",
+        "intraday high or low for a listed security",
+        "commodity closing or average price forecast",
+        "foreign exchange rate on a specific date"
+      ],
+      "examples": [
+        "2026-03-20, what will the high of CanSino (SH:688185) be for the day (in CNY)?",
+        "What will be the average price of pork (in yuan per kilogram) on 2026-03-23?",
+        "2026-03-19, what will be the value in Chinese Yuan of 100 units of British Pound at the central bank rate?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "stock_intraday_high_exact_value",
+          "description": "Predict the exact intraday high or low price of a listed stock or broad market index on a specific trading day. The outcome is a single precise numeric price matched to the answer.",
+          "summarized_patterns": [
+            "exact intraday high or low for a listed stock or index",
+            "single-day price extremum numeric forecast",
+            "precise price level for a named security on a trading day"
+          ],
+          "examples": [
+            "2026-03-20, what will the high of CanSino (SH:688185) be for the day (in CNY)? Outcome to predict: \"73.88\"",
+            "2026-03-24, what will be the low for the CSI 300 Index for the day?"
+          ]
+        },
+        {
+          "subcategory_name": "commodity_closing_price",
+          "description": "Predict the closing or average price of a commodity (agricultural, energy, metal, etc.) on a specific date, typically as a multi-option banded outcome reported by a named data source or exchange.",
+          "summarized_patterns": [
+            "commodity closing or average price on a specific date",
+            "banded price outcome for a commodity",
+            "price forecast tied to a named data provider or market"
+          ],
+          "examples": [
+            "What will be the closing price of lumber on 20 March 2026, according to Trading Economics?",
+            "What will be the average price of pork (in yuan per kilogram) on 2026-03-23?",
+            "What will be the average price of lamb (in yuan per kilogram) on 2026-03-26?"
+          ]
+        },
+        {
+          "subcategory_name": "fx_rate_exact_value",
+          "description": "Predict the exact foreign exchange rate between two named currencies on a specific date, as published by a named central bank or data source.",
+          "summarized_patterns": [
+            "foreign exchange rate between two currencies on a date",
+            "central bank or official FX rate forecast",
+            "exact currency conversion value on a named date"
+          ],
+          "examples": [
+            "2026-03-19, what will be the value in Chinese Yuan of 100 units of British Pound at the central bank rate?",
+            "What will be the USD/CNY exchange rate on a specific date?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "financial_market_metrics",
+      "description": "Questions predicting company-level financial metrics (market capitalization, P/E ratio, etc.) for a listed company on a specific date.",
+      "summarized_patterns": [
+        "company market cap on a specific date in specified currency and units",
+        "firm-level financial metric forecast",
+        "stock-derived valuation figure"
+      ],
+      "examples": [
+        "2026-03-23, what will be the stock market capitalization of Agricultural Bank of China on the Shanghai Stock Exchange?",
+        "2026-03-20, what will be the total market capitalization (总市值) of Ping An Bank (000001) on the Shenzhen Stock Exchange?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "company_market_cap_numeric",
+          "description": "Predict the total market capitalization of a named listed company on a specific date, expressed as a numeric value with specified precision and currency.",
+          "summarized_patterns": [
+            "company market cap in specified currency and units on a date",
+            "listed firm total market value forecast",
+            "specific-date market-cap numeric estimate for a named stock"
+          ],
+          "examples": [
+            "2026-03-20, what will be the total market capitalization (总市值) of Ping An Bank (000001) on the Shenzhen Stock Exchange in hundreds of millions of yuan?",
+            "2026-03-23, what will be the stock market capitalization (市价总值) of Agricultural Bank of China on the Shanghai Stock Exchange?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "financial_markets",
+      "description": "Questions predicting the directional movement of a financial asset (stock, index, ETF) between two dates — will it be higher or lower.",
+      "summarized_patterns": [
+        "will stock or index be higher on date A than date B",
+        "binary directional asset price movement",
+        "relative price comparison between two specified dates"
+      ],
+      "examples": [
+        "Will NVIDIA stock be higher on March 16, 2026 than on March 09, 2026?",
+        "Will Apple (AAPL) close higher on 2026-05-01 than on 2026-04-24?",
+        "Will the S&P 500 index be higher at the close on 2026-06-01 than its close one week earlier?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "equity_price_direction",
+          "description": "Predict whether a named equity (stock, ETF, or index) will be higher or lower on a future date compared to a reference date. Binary yes/no outcome.",
+          "summarized_patterns": [
+            "equity price higher or lower on a future date vs a reference date",
+            "binary short-term stock or index directional movement",
+            "relative price comparison between two specified dates"
+          ],
+          "examples": [
+            "Will NVIDIA stock be higher on March 16, 2026 than on March 09, 2026?",
+            "Will Apple (AAPL) close higher on 2026-05-01 than on 2026-04-24?",
+            "Will the S&P 500 index be higher at the close on 2026-06-01 than its close one week earlier?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "geopolitical_and_military_events",
+      "description": "Questions about military actions, troop deployments, armed conflict outcomes, ceasefire announcements, diplomatic meetings, civil unrest casualties, or international transport resumptions driven by geopolitical conditions.",
+      "summarized_patterns": [
+        "will military action or troop deployment occur within a window",
+        "ceasefire or conflict resolution announcement",
+        "head-of-state bilateral meeting occurrence",
+        "protest or conflict casualty count"
+      ],
+      "examples": [
+        "Will America send troops to Iran within this week?",
+        "Will there be a ceasefire announced between US/Israel and Iran?",
+        "Will the president of the United States and Nicolás Maduro meet in person before March 19?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "troop_deployment_or_military_action",
+          "description": "Predict whether a named country will deploy troops, conduct a military strike, or take an armed military action within a specified time window.",
+          "summarized_patterns": [
+            "will troops be deployed or military action occur within a window",
+            "cross-border military operation or strike prediction",
+            "armed forces movement or engagement within a deadline"
+          ],
+          "examples": [
+            "Will America send troops to Iran within this week?",
+            "Will country X conduct military operations in region Y before a deadline?"
+          ]
+        },
+        {
+          "subcategory_name": "ceasefire_or_conflict_resolution",
+          "description": "Predict whether a ceasefire, peace deal, or formal conflict resolution announcement will be made between named parties within a time window.",
+          "summarized_patterns": [
+            "ceasefire announcement between named parties within a deadline",
+            "peace deal or formal conflict resolution outcome",
+            "end-of-hostilities declaration within a window"
+          ],
+          "examples": [
+            "Will there be a ceasefire announced between US/Israel and Iran between 11th and 15th March 2026?",
+            "Will parties reach a peace agreement within the week?"
+          ]
+        },
+        {
+          "subcategory_name": "diplomatic_meeting_outcome",
+          "description": "Predict whether a scheduled or anticipated head-of-state or senior diplomatic meeting will occur, or produce a specific outcome, before a deadline.",
+          "summarized_patterns": [
+            "will head-of-state bilateral meeting occur before a date",
+            "diplomatic summit or in-person meeting outcome",
+            "will named leaders meet within a specified window"
+          ],
+          "examples": [
+            "Will the president of the United States and Nicolás Maduro meet in person before March 19, 2026?",
+            "Will the summit produce a joint communiqué?"
+          ]
+        },
+        {
+          "subcategory_name": "protest_casualty_count_numeric",
+          "description": "Predict the numeric count of fatalities, injuries, or casualties resulting from a named protest movement, civil unrest event, or conflict within a specified time window.",
+          "summarized_patterns": [
+            "how many people will die or be injured in named protests before a date",
+            "numeric casualty count from civil unrest or conflict",
+            "fatality threshold in a named protest or unrest event"
+          ],
+          "examples": [
+            "How many people will die as a part of the 2025-26 Iranian protests before March 20th?",
+            "How many casualties will result from the conflict before the deadline?"
+          ]
+        },
+        {
+          "subcategory_name": "international_commercial_air_service_resumption",
+          "description": "Predict whether foreign airlines will resume commercial passenger flight service to a named airport or country by a specified date, typically in the context of geopolitical conflict or sanctions.",
+          "summarized_patterns": [
+            "will foreign airlines resume flights to a named airport by a date",
+            "commercial air service resumption driven by geopolitical conditions",
+            "binary flight resumption prediction"
+          ],
+          "examples": [
+            "Will foreign airlines resume commercial passenger flights to Tel Aviv (TLV) by March 15, 2026?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "public_statements_or_behavior",
+      "description": "Questions about whether, what, or how often something will be publicly said or announced at a scheduled event or within a time window, including whether a scheduled event itself will occur.",
+      "summarized_patterns": [
+        "will a phrase or keyword be mentioned in a public event",
+        "how many times will something be said at an event",
+        "will a lineup or program be released before a deadline",
+        "will a named event actually happen"
+      ],
+      "examples": [
+        "Will President Trump mention 'crypto' or 'Bitcoin' during his remarks?",
+        "Will the Chair of the Federal Reserve say the word 'cut' three or more times?",
+        "Will the next Coachella lineup be released before Nov 1, 2025?",
+        "Will CS camp happen?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "phrase_mention",
+          "description": "Binary prediction of whether a specific keyword or phrase will be mentioned during a named public event or appearance.",
+          "summarized_patterns": [
+            "binary keyword mention in a public appearance",
+            "will a named phrase be said during remarks",
+            "specific word usage in a scheduled public event"
+          ],
+          "examples": [
+            "Will President Trump mention 'crypto' or 'Bitcoin' during his remarks at the UK State Banquet on September 17?",
+            "Will a speaker mention a keyword during a public appearance?"
+          ]
+        },
+        {
+          "subcategory_name": "mention_count_or_frequency",
+          "description": "Predict the count or frequency of a phrase or keyword in a public event (e.g., said at least N times).",
+          "summarized_patterns": [
+            "count of phrase mentions in a single public event",
+            "will a word be said at least N times during an event",
+            "keyword frequency threshold in a speech or press conference"
+          ],
+          "examples": [
+            "Will Jerome Powell say the word 'cut' three or more times during the post-FOMC press conference?",
+            "Will a phrase be said at least three times?"
+          ]
+        },
+        {
+          "subcategory_name": "specific_quote_or_position",
+          "description": "Predict what specific statement, position, or quoted language a named person will express at a public event.",
+          "summarized_patterns": [
+            "what statement will be made at a named public event",
+            "which position will be publicly expressed",
+            "quoted language outcome at a debate or press conference"
+          ],
+          "examples": [
+            "What will Zohran Mamdani say during the debate?",
+            "Which phrase will a candidate use during the debate?"
+          ]
+        },
+        {
+          "subcategory_name": "event_lineup_or_program_release_timing",
+          "description": "Predict whether an organizer will publicly release a lineup, schedule, or program before a specified deadline.",
+          "summarized_patterns": [
+            "will a lineup or program be publicly announced before a date",
+            "release timing of an official event announcement",
+            "whether organizers publish information before a deadline"
+          ],
+          "examples": [
+            "Will the next Coachella lineup be released to the public before Nov 1, 2025?"
+          ]
+        },
+        {
+          "subcategory_name": "single_event_happening",
+          "description": "Binary prediction of whether a named event, activity, or occurrence will actually happen within a time window. Covers miscellaneous events not captured by more specific categories.",
+          "summarized_patterns": [
+            "will a named event or activity occur (yes/no)",
+            "event cancellation or confirmation binary",
+            "will something happen before or within a deadline"
+          ],
+          "examples": [
+            "Will CS camp happen?",
+            "Will the scheduled event be canceled or postponed?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "referendum_and_electoral_thresholds",
+      "description": "Questions about whether a referendum will meet a legally required turnout or approval threshold to be valid or binding.",
+      "summarized_patterns": [
+        "will referendum turnout exceed the required legal quorum",
+        "binary validity of a referendum outcome",
+        "voter participation level relative to a legal minimum"
+      ],
+      "examples": [
+        "Italy judicial reform: Will turnout at the March 2026 referendum exceed 50%?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "referendum_turnout_binary",
+          "description": "Predict whether voter turnout in a referendum will exceed the legally required minimum threshold (quorum) for the result to be binding.",
+          "summarized_patterns": [
+            "will referendum turnout exceed the legal quorum threshold",
+            "binary quorum achievement in a named referendum",
+            "voter participation above or below the required legal minimum"
+          ],
+          "examples": [
+            "Italy judicial reform: Will turnout at the March 2026 referendum exceed 50%?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "corporate_governance_and_shareholder_votes",
+      "description": "Questions about the outcome of shareholder meetings, proxy votes, or corporate governance decisions such as mergers or significant corporate transactions.",
+      "summarized_patterns": [
+        "shareholder vote approval or rejection of a corporate action",
+        "board or proxy vote result on a named transaction",
+        "corporate governance decision outcome"
+      ],
+      "examples": [
+        "How will Warner Bros. Discovery shareholders vote at the Mar 20, 2026 special meeting regarding a sale of the company?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "shareholder_vote_outcome",
+          "description": "Predict the outcome of a formal shareholder or board vote on a named corporate action (merger, sale, proposal).",
+          "summarized_patterns": [
+            "binary or multi-option shareholder vote outcome",
+            "approval or rejection of a named corporate transaction",
+            "board or proxy vote result"
+          ],
+          "examples": [
+            "How will Warner Bros. Discovery shareholders vote at the Mar 20, 2026 special meeting regarding a sale of the company?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "review_or_critic_outcomes",
+      "description": "Questions about the numeric critic score or rating band a media title will receive from an aggregator (Metacritic, Rotten Tomatoes, etc.).",
+      "summarized_patterns": [
+        "Metacritic or Metascore numeric outcome",
+        "Rotten Tomatoes Tomatometer score threshold",
+        "critic reception band or tier forecast"
+      ],
+      "examples": [
+        "What will Borderlands 4's Metascore on Metacritic be seven days after release?",
+        "Will 'Downton Abbey: The Grand Finale' have a Rotten Tomatoes Tomatometer score above 45%?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "metascore_numeric",
+          "description": "Predict the exact or banded numeric Metascore a title will receive on Metacritic.",
+          "summarized_patterns": [
+            "numeric Metascore forecast for a title",
+            "Metacritic critic aggregate score",
+            "what score will a named title receive"
+          ],
+          "examples": [
+            "What will Borderlands 4's Metascore on Metacritic be seven days after the game's release?",
+            "What will Hollow Knight: Silksong's Metascore on Metacritic be?"
+          ]
+        },
+        {
+          "subcategory_name": "critic_score_threshold",
+          "description": "Predict whether a title's aggregate critic score will be above or below a specified threshold.",
+          "summarized_patterns": [
+            "score above or below a critic threshold",
+            "will critic aggregate clear the target percentage",
+            "threshold crossing by a review score"
+          ],
+          "examples": [
+            "Will 'Downton Abbey: The Grand Finale' have a Rotten Tomatoes Tomatometer score above 45%?",
+            "Will a film score above a critic threshold?"
+          ]
+        },
+        {
+          "subcategory_name": "critic_rating_band",
+          "description": "Predict which rating band or reception tier a title's critic score will fall into.",
+          "summarized_patterns": [
+            "score band or rating bucket forecast",
+            "critic reception tier outcome",
+            "which score range will the title land in"
+          ],
+          "examples": [
+            "Will a title land in the 70-79 critic score band?",
+            "Which rating band will the title fall into?"
+          ]
+        }
+      ]
+    },
+    {
+      "category_name": "random_game_of_chance_outcomes",
+      "description": "Questions whose outcomes are determined purely by random chance with no predictive signal (dice rolls, coin flips, random draws). These questions cannot be forecast from evidence and should be treated as uniform distributions.",
+      "summarized_patterns": [
+        "dice roll sum or outcome",
+        "random draw result",
+        "pure chance event with no predictive signal"
+      ],
+      "examples": [
+        "What will the sum of the dice rolls be?"
+      ],
+      "subcategories": [
+        {
+          "subcategory_name": "dice_sum_or_simple_random_draw",
+          "description": "Predict the outcome of a pure random chance event such as a dice roll sum, coin flip, or random draw. There is no meaningful predictive signal; the correct forecast is always a uniform or binomial distribution over the outcomes.",
+          "summarized_patterns": [
+            "dice roll sum or outcome",
+            "coin flip or random draw result",
+            "outcome determined purely by chance with no evidence"
+          ],
+          "examples": [
+            "What will the sum of the dice rolls be? Outcomes: A, B, C, D, E"
+          ]
+        }
+      ]
+    }
+  ]
+}

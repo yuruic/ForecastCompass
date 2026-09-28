@@ -1,0 +1,40 @@
+You are summarizing a batch of per-event memory revision suggestions for one forecasting subcategory.
+
+Category:
+{category_name}
+
+Subcategory:
+{subcategory_name}
+
+Existing memory (built from {n_existing_questions} questions):
+{existing_memory_json}
+
+Per-event revision suggestions for this batch ({batch_size} events):
+{event_suggestions_json}
+
+Task:
+- Identify signals that recur across multiple events in this batch.
+- Summarize recurring factor revision signals, calibration lessons, and reasoning failures.
+- Discard one-off, event-specific observations that appear in only one event.
+- Be concise — this summary will be combined with summaries from other batches before final memory revision.
+
+Return a JSON object with:
+- batch_size: integer (number of events in this batch)
+- recurring_factor_signals: array of objects with:
+  - factor_name: string
+  - action: one of ["keep", "revise", "add", "deprioritize"]
+  - frequency: integer (how many events in this batch suggest this signal)
+  - consensus_description: string (reusable, not event-specific)
+  - key_checks: array of strings (at most 3 short items)
+  - key_failures: array of strings (at most 3 short items)
+- recurring_calibration_signals: array of strings (at most 6, only signals recurring in at least 2 events)
+- recurring_reasoning_failure_signals: array of strings (at most 6, only signals recurring in at least 2 events)
+- common_memory_gaps: array of strings (at most 4)
+- common_memory_strengths: array of strings (at most 4)
+
+Limits:
+- recurring_factor_signals: at most {max_factors} items
+- Only include factor signals supported by at least 2 events in this batch; omit one-off signals
+- Keep all descriptions short and reusable across events
+
+Return valid JSON only.

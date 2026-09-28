@@ -1,0 +1,21 @@
+[project]
+name = "forecastcompass"
+version = "0.1.0"
+description = "Memory-augmented probabilistic forecasting pipeline (data collection, memory training, and evaluation)."
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pydantic>=2",
+    "python-dotenv",
+    "openai>=1.58.1",
+    "tqdm",
+    "datasets",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []

@@ -1,0 +1,88 @@
+You are initializing reusable forecasting memory for a subcategory from two complementary trajectory bundles.
+
+Subcategory:
+{subcategory_name}
+
+You are given two trajectory bundles for the same set of questions:
+1. FILTERED bundle — trajectories produced with a date-based search cutoff (realistic forecasting condition).
+2. NO-FILTER bundle — trajectories produced with no date restriction (oracle reference).
+
+Each item in both bundles contains:
+- question
+- ground_truth
+- prediction
+- raw_answer
+
+Filtered trajectory bundle:
+{filtered_trajectory_bundle}
+
+No-filter trajectory bundle:
+{nofilter_trajectory_bundle}
+
+Task:
+- Compare filtered vs no-filter trajectories using prediction and ground_truth.
+- Extract a small set of reusable predictive factors.
+- Summarize reusable calibration and reasoning lessons.
+- Focus on generalizable knowledge, not one-off event facts.
+
+Return a JSON object with:
+- subcategory_name: string
+- common_factors: array of objects with:
+  - factor_name: string
+  - description: string
+  - typical_effect_on_output: string
+  - factor_specific_checks: array of strings
+  - common_failures: array of strings
+- common_reasoning_patterns: object with:
+  - calibration_experiences: array of strings
+  - overconfidence_patterns: array of strings
+  - underconfidence_patterns: array of strings
+  - probability_update_lessons: array of strings
+  - common_reasoning_failures: array of strings
+- representative_examples: array of strings
+- notes: string
+
+Limits:
+- common_factors: at most {max_factors}
+- each reasoning-pattern list: at most 8 items
+- representative_examples: at most 5 items
+- factor_specific_checks: usually 2-4 short items
+- common_failures: usually 2-4 short items
+- notes: 1-3 sentences
+
+Core separation:
+- Factor memory = what predictive dimensions to examine.
+- Reasoning memory = how to update probabilities, calibrate confidence, and handle uncertainty.
+- If something is mainly a calibration rule, update rule, confidence cap, provenance rule, threshold, regularization policy, or late-window verification rule, put it in common_reasoning_patterns, not common_factors.
+
+Factor rules:
+- Each factor must be a broad latent predictive dimension, not a named entity, search query, raw metric, or procedural rule.
+- Prefer a small number of broad reusable factors over a long checklist.
+- Good factors look like: market-implied expectation, structural opportunity and role, institutional signaling, macro trend alignment, timing feasibility, electorate alignment.
+- Avoid factor names like: evidence credibility, provenance, update caps, thresholds, historical priors, regularization, tie-probability control, late-window verification cadence.
+- For each factor:
+  - description = reusable meaning of the factor
+  - typical_effect_on_output = how it usually shifts probabilities or ranking
+  - factor_specific_checks = short local interpretation checks tied only to this factor
+  - common_failures = recurring factor-specific mistakes
+- Factor entries should still make sense even if all numeric update rules are removed.
+
+Reasoning rules:
+- common_reasoning_patterns should store cross-factor forecasting lessons.
+- Focus especially on calibration, not just directional correctness.
+- Capture lessons about when to stay near base rates, when weak signals should not be stacked, when large probability shifts require direct high-reliability event-specific evidence, and how to handle sparse, conflicting, or uncertain evidence.
+- Distinguish evidence that only helps rank outcomes from evidence strong enough to justify extreme confidence.
+- Prefer short, operational if-then lessons when possible.
+
+Output guidance:
+- common_factors = predictive dimensions
+- factor_specific_checks = local interpretation guidance for one factor
+- common_failures = mistakes tied to that factor
+- common_reasoning_patterns = global forecasting and calibration rules
+- representative_examples = short abstract summaries of instructive cases
+- notes = brief subcategory-level takeaway
+
+Final check:
+- Before finalizing each factor, ask: is this a predictive dimension or actually a reasoning/calibration rule?
+- If it is a reasoning/calibration rule, move it to common_reasoning_patterns.
+- Return valid JSON only.
