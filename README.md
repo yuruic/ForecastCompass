@@ -2,7 +2,7 @@
 
 Official repository for the paper
 [**ForecastCompass: Guiding Agentic Forecasting with Adaptive Factor Memory**](https://arxiv.org/abs/2605.30858),
-**accepted at NeurIPS 2026**.
+🎉**accepted at NeurIPS 2026**.
 
 A memory-augmented probabilistic forecasting pipeline. An LLM agent forecasts
 outcomes for prediction-market questions (Prophet Arena, FutureX) week by
