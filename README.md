@@ -1,5 +1,8 @@
 # ForecastCompass
 
+Official repository for the paper
+[**ForecastCompass: Guiding Agentic Forecasting with Adaptive Factor Memory**](https://arxiv.org/abs/2605.30858).
+
 A memory-augmented probabilistic forecasting pipeline. An LLM agent forecasts
 outcomes for prediction-market questions (Prophet Arena, FutureX) week by
 week, optionally guided by a "subcategory memory" that is trained on earlier
@@ -152,4 +155,18 @@ utils/          shared engine used by both train/ and test/
 prompt/         prompt templates used by the memory pipeline
 init_ctgr/      default taxonomy seeds (init_ctgr/{dataset}_ctgr.json)
 src/agents/     vendored openai-agents SDK
+```
+
+## Citation
+
+```bibtex
+@misc{chang2026forecastcompassguidingagenticforecasting,
+      title={ForecastCompass: Guiding Agentic Forecasting with Adaptive Factor Memory}, 
+      author={Yurui Chang and Yongkang Du and Yuanpu Cao and Jinghui Chen and Lu Lin},
+      year={2026},
+      eprint={2605.30858},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2605.30858}, 
+}
 ```
