@@ -26,20 +26,11 @@ pip install -e .          # this project's dependencies
 pip install -e src/       # vendored openai-agents SDK (src/agents)
 ```
 
-Create a `.env` file at the project root with the credentials for whichever
+Copy `.env.example` to `.env` and fill in the credentials for whichever
 providers you use:
 
-```
-# LLM providers (pick what --provider needs)
-AZURE_OPENAI_ENDPOINT=...
-AZURE_OPENAI_API_KEY=...
-OPENAI_API_KEY=...          # used by --provider openai/auto
-GEMINI_API_KEY=...          # used by --provider gemini
-
-# Web search backend (pick what --search-provider needs)
-SERPAPI_API_KEY=...
-SERPER_API_KEY=...
-TAVILY_API_KEY=...
+```bash
+cp .env.example .env
 ```
 
 ## 1. Data process
