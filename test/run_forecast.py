@@ -6,7 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import utils.memory_pipeline as memory_pipeline
-from utils.file_processor import get_weekly_csvs
+from utils.results_io import get_weekly_csvs
 from utils.agent_toolkit import parse_outcomes_arg
 from utils.inference_runner import (
     run_custom_question,

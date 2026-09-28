@@ -56,7 +56,7 @@ python data_process/futurex_loader.py
 python data_process/futurex_online_loader.py --week 12
 ```
 
-`utils/file_processor.get_weekly_csvs()` reads the resulting files; pass
+`utils/results_io.get_weekly_csvs()` reads the resulting files; pass
 `--collect-fresh` to `test/run_forecast.py` to re-collect Prophet Arena on the
 fly instead of using cached weekly files.
 
@@ -116,8 +116,7 @@ Each epoch's memory is saved to
 `.../week{N}/memory_epochs/epoch_{k}/memory.json`, alongside that epoch's own
 evaluation. Use `--start-epoch` to resume training partway through, and
 `--initial-memory-path` / `--taxonomy-path` to carry a previous week's memory
-and taxonomy forward into the next week. See `job.sh` for more complete
-examples (classification updates, resuming, cross-model transfer, etc.).
+and taxonomy forward into the next week.
 
 ## 4. Test memory
 
@@ -139,22 +138,16 @@ This reports the baseline Brier score, the with-memory Brier score, and the
 delta between them. Add `--ablations` to instead run the no-factor-memory /
 no-reasoning-memory ablations against an existing summary.
 
-`test/test_memory.sh` wraps this into a loop over several target weeks for a
-fixed trained memory (defaults: Prophet Arena memory from week6/epoch_3
-tested on weeks 7–10; FutureX memory from week8/epoch_2 tested on weeks
-9–12):
-
-```bash
-bash test/test_memory.sh                 # prophet_arena, azure, gpt-5-mini
-bash test/test_memory.sh futurex azure gpt-5-mini 2
-```
+To test one trained memory against several target weeks, call
+`test/run_forecast.py --memory-mode trained` once per week with
+`--evaluated-data-path` pointed at that week's baseline evaluation.
 
 ## Project layout
 
 ```
 data_process/   HuggingFace dataset downloaders → weekly CSVs
 train/          train_memory.py — per-epoch memory training
-test/           run_forecast.py, test_memory.sh — inference + scoring
+test/           run_forecast.py — inference + scoring
 utils/          shared engine used by both train/ and test/
 prompt/         prompt templates used by the memory pipeline
 init_ctgr/      default taxonomy seeds (init_ctgr/{dataset}_ctgr.json)

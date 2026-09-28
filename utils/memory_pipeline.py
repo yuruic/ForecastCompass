@@ -706,7 +706,7 @@ def _classification_lookup(
 def _load_samples_payload(results_or_evaluation_path: str | Path) -> dict[str, Any]:
     path = Path(results_or_evaluation_path)
     if path.suffix == ".jsonl":
-        from utils.file_processor import load_results_payload
+        from utils.results_io import load_results_payload
         return load_results_payload(path)
     return _load_json(path)
 
