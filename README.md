@@ -3,12 +3,11 @@
 Official repository for the paper
 [**ForecastCompass: Guiding Agentic Forecasting with Adaptive Factor Memory**](https://arxiv.org/abs/2605.30858).
 
-A memory-augmented probabilistic forecasting pipeline. An LLM agent forecasts
-outcomes for prediction-market questions (Prophet Arena, FutureX) week by
-week, optionally guided by a "subcategory memory" that is trained on earlier
-weeks and evaluated on later, held-out weeks.
+ForecastCompass is a memory-augmented probabilistic forecasting framework for agentic forecasting.
 
-The pipeline has three stages:
+Given prediction-market questions from platforms such as Prophet Arena and FutureX, the model performs forecasting over time and maintains adaptive factor memory learned from historical forecasting outcomes. The learned memory can then guide forecasting on future, held-out questions.
+
+The pipeline consists of three stages:
 
 1. **Data process** — download raw prediction-market data and split it into
    weekly CSVs.
