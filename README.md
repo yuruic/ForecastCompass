@@ -1,7 +1,7 @@
 # ForecastCompass
 
 Official repository for the paper
-[**ForecastCompass: Guiding Agentic Forecasting with Adaptive Factor Memory**](https://arxiv.org/abs/2605.30858).
+[**ForecastCompass: Guiding Agentic Forecasting with Adaptive Factor Memory**](https://arxiv.org/pdf/2605.30858).
 
 ForecastCompass is a memory-augmented probabilistic forecasting framework for agentic forecasting.
 
